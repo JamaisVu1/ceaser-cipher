@@ -60,3 +60,21 @@ def test_crack_nonsense():
     actual = crack(encrypted)
     expected = ""
     assert actual == expected
+
+def test_encrypt_shift():
+    assert encrypt("abc", 3) == "def"
+    assert encrypt("xyz", 2) == "zab"
+
+def test_decrypt_with_shift():
+    original = "Hello, World!"
+    shift = 5
+    encrypted = encrypt(original, shift)
+    assert decrypt(encrypted, shift) == original
+
+def test_case_sensitive():
+    assert encrypt("Abc", 1) == "Bcd"
+    assert encrypt("XYZ", 2) == "ZAB"
+
+def test_handling_non_alpha():
+    assert encrypt("Hello, World! 123", 3) == "Khoor, Zruog! 123"
+
